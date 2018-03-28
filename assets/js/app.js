@@ -33,3 +33,19 @@ $("#submit-btn").on("click", function (event) {
     $("#email").val("");
     $("#pwd").val("");
 });
+
+// get data from firebase
+// value gets up everything in the database
+// where child_added will get us each record
+// one at a time
+database.ref().on("child_added", function(snapshot){
+    console.log(snapshot.val());
+    // make a dynamic <tr> element in jQuery
+    var tr = $("<tr>");
+    var td1 = $("<td>").text(snapshot.val().username);
+    var td2 = $("<td>").text(snapshot.val().email);
+    tr.append(td1, td2);
+    // display data in the table 
+    $("tbody").append(tr);
+}); 
+
